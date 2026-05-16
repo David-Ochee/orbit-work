@@ -15,7 +15,7 @@
     "@simplewebauthn/browser": "^10.0.0",
     "graphql": "^16.9.0",
     "graphql-ws": "^5.16.0",
-    "next": "^14.2.5",
+    "next": "^16.2.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "stellar-sdk": "^12.3.0"
