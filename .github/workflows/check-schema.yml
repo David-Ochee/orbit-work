@@ -11,12 +11,12 @@ jobs:
     name: Schema Sync Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # Optional: check out private backend repo if token is provided
       - name: Checkout backend repo
         if: ${{ secrets.ORBITWORK_BACKEND_TOKEN != '' }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: David-Ochee/orbit-work-backend
           token: ${{ secrets.ORBITWORK_BACKEND_TOKEN }}
