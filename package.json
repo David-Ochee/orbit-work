@@ -1,0 +1,59 @@
+{
+  "name": "orbit-work",
+  "version": "1.0.0",
+  "description": "Inclusive Web3 bounty platform on Stellar — earn XLM for design, writing, research, marketing, and development",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run dev --workspace=backend\"",
+    "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
+    "test": "npm run test --workspace=frontend && npm run test --workspace=backend",
+    "test:integration": "npm run test:integration --workspace=backend",
+    "test:contracts": "cd contracts && cargo test",
+    "lint": "eslint . --ext .ts,.tsx,.js",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md}\"",
+    "sync-schema": "node ./scripts/sync-schema.js",
+    "check-schema": "node ./scripts/sync-schema.js --check",
+    "db:migrate": "npm run db:migrate --workspace=backend",
+    "db:seed": "node ./scripts/seed.js",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.5",
+    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/David-Ochee/orbit-work.git"
+  },
+  "keywords": [
+    "stellar",
+    "soroban",
+    "bounty",
+    "web3",
+    "xlm",
+    "open-source"
+  ],
+  "author": "OrbitWork Contributors",
+  "bugs": {
+    "url": "https://github.com/David-Ochee/orbit-work/issues"
+  },
+  "homepage": "https://orbitwork.xyz"
+}

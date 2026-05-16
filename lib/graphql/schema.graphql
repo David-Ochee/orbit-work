@@ -1,0 +1,109 @@
+scalar DateTime
+
+enum BountyStatus {
+  open
+  in_progress
+  completed
+  cancelled
+}
+
+enum BountyCategory {
+  code
+  design
+  writing
+  research
+  marketing
+  community
+}
+
+enum ClaimType {
+  first_come
+  competitive
+  curated
+}
+
+enum Currency {
+  XLM
+  USDC
+}
+
+enum ApplicationStatus {
+  pending
+  accepted
+  rejected
+  withdrawn
+}
+
+type User {
+  id: ID!
+  username: String!
+  avatarUrl: String
+  bio: String
+  stellarAddress: String
+  credits: Int!
+  reputation: Int!
+  bounties: [Bounty!]!
+  applications: [Application!]!
+  createdAt: DateTime!
+}
+
+type Bounty {
+  id: ID!
+  title: String!
+  description: String!
+  reward: Float!
+  currency: Currency!
+  status: BountyStatus!
+  category: BountyCategory!
+  claimType: ClaimType!
+  sponsor: User!
+  applications: [Application!]!
+  escrowTxHash: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  expiresAt: DateTime
+}
+
+type Application {
+  id: ID!
+  bounty: Bounty!
+  applicant: User!
+  proposal: String!
+  status: ApplicationStatus!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  bounties(
+    status: BountyStatus
+    category: BountyCategory
+    limit: Int
+    offset: Int
+  ): [Bounty!]!
+  bounty(id: ID!): Bounty
+  user(id: ID!): User
+  me: User
+  applications(bountyId: ID): [Application!]!
+}
+
+type Mutation {
+  createBounty(
+    title: String!
+    description: String!
+    reward: Float!
+    currency: Currency
+    category: BountyCategory!
+    claimType: ClaimType
+    expiresAt: DateTime
+  ): Bounty!
+  updateBounty(id: ID!, title: String, description: String, reward: Float, status: BountyStatus, expiresAt: DateTime): Bounty!
+  deleteBounty(id: ID!): Boolean!
+  createApplication(bountyId: ID!, proposal: String!): Application!
+  updateApplication(id: ID!, status: ApplicationStatus, proposal: String): Application!
+}
+
+type Subscription {
+  bountyCreated: Bounty!
+  applicationUpdated(bountyId: ID!): Application!
+}

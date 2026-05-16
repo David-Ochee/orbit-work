@@ -1,0 +1,35 @@
+name: Check GraphQL Schema
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  check-schema:
+    name: Schema Sync Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Optional: check out private backend repo if token is provided
+      - name: Checkout backend repo
+        if: ${{ secrets.ORBITWORK_BACKEND_TOKEN != '' }}
+        uses: actions/checkout@v4
+        with:
+          repository: David-Ochee/orbit-work-backend
+          token: ${{ secrets.ORBITWORK_BACKEND_TOKEN }}
+          path: orbit-work-backend
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check schema is in sync
+        run: npm run check-schema
+        env:
+          CANONICAL_SCHEMA: ${{ secrets.CANONICAL_SCHEMA }}
