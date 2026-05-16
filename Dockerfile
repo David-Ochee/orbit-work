@@ -1,5 +1,5 @@
 # ─── Build stage ─────────────────────────────────────────────────────────────
-FROM node:20-alpine AS builder
+FROM node:26-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
@@ -14,7 +14,7 @@ RUN npm run build --workspace=backend
 RUN npm run build --workspace=frontend
 
 # ─── Backend runtime ─────────────────────────────────────────────────────────
-FROM node:20-alpine AS backend
+FROM node:26-alpine AS backend
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -29,7 +29,7 @@ EXPOSE 4000
 CMD ["node", "dist/index.js"]
 
 # ─── Frontend runtime (standalone Next.js) ───────────────────────────────────
-FROM node:20-alpine AS frontend
+FROM node:26-alpine AS frontend
 WORKDIR /app
 
 ENV NODE_ENV=production
