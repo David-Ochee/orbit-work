@@ -1,4 +1,4 @@
-//! StellarWork — Escrow Contract
+//! OrbitWork — Escrow Contract
 //!
 //! Locks XLM (or a Stellar asset) on behalf of a bounty sponsor until the
 //! platform releases funds to an approved contributor, or refunds the sponsor.

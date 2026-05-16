@@ -1,4 +1,4 @@
-//! StellarWork — Reputation Contract
+//! OrbitWork — Reputation Contract
 //!
 //! Tracks on-chain reputation scores for contributors.
 //! Scores are incremented by the platform admin when a bounty is completed.
