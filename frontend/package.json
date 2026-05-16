@@ -11,7 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.4",
+    "@apollo/client": "^4.1.9",
     "@simplewebauthn/browser": "^10.0.0",
     "graphql": "^16.9.0",
     "graphql-ws": "^5.16.0",
